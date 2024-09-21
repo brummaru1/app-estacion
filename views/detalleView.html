@@ -1,0 +1,89 @@
+@extern('header')
+
+	
+	<template id="temp">
+	
+			<div class="carta">
+				<div class="apodo"></div>
+
+				<div  class="icono">
+	           		<i class="material-icons-outlined location">location_on</i>
+	          		<div id="ubicacion"></div>
+	        	</div>
+			</div>
+		
+	</template>
+
+	<div id="estacion" class="contenedor"></div>
+
+
+ </body>
+
+	 <script type="text/javascript">
+	 	
+		let url = new URLSearchParams(location.search);
+		var chipId = url.get('chipId')
+	 	loadPage();
+	 	
+
+	 	/**
+	 	 * 
+	 	 * @brief carga elementos en el listado
+	 	 * 
+	 	 * */
+	 	function loadPage(){
+	 		// limpia el listado
+		 	estacion.innerHTML = "";
+		 	// Llamada a la función asincrona que obtiene un listado de usuarios
+		 	getEstacion(chipId).then( data => {
+		 				/*< si hay elementos en el listado*/
+		 				console.log(data.list)
+		 		data.list.forEach( row  => {
+			 		
+			 			// Crea e inserta una fila dentro de estacion
+			 			addRowStream(row);
+			 		});
+		 	} )
+	 	}
+
+	 	/**
+	 	 * 
+	 	 * @brief Agrega una fila dentro de estacion
+	 	 * @param object data fila con datos de usuario
+	 	 * 
+	 	 **/
+	 	function addRowStream(data){
+	 		/*< captura el contenido de la template */
+	 		const tpl = temp.content;
+	 		/*< clona la plantilla como un nodo completo*/
+	 		const clon = tpl.cloneNode(true);
+	 		/*< alteramos el contenido del clon con los valores de data */
+	 		clon.querySelector(".apodo").textContent = data.apodo;
+	 		clon.querySelector("#ubicacion").textContent = data.ubicacion;
+	 		
+	 		/*< inserta el clon modificado dentro de estacion */
+	 		estacion.appendChild(clon);
+	 	}
+
+
+	 	/**
+	 	 * 
+	 	 * @brief Retorna un listado de las estaciones meteorologicas en formato JSON
+	 	 * @param int inicio desde que fila inicia.
+	 	 * @param int cantidad cantidad de filas a listar
+	 	 * @return json listado de usuarios
+	 	 * 
+	 	 * */
+	 	async function getEstacion(param){
+	 		/*< consulta a la API */
+	 		const response = await fetch("api/estacion/get/?chipId="+param);
+	 		const data = await response.json()
+	 		return data;
+	 	}
+
+
+
+
+	 </script>
+	
+</html>

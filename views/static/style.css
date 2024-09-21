@@ -1,0 +1,67 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body{
+	height: 100vh;
+	width: 100%;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	background-color: #3498db;
+}
+
+header{
+	width: 100%;
+	height: 3rem;
+	background-color: black;
+	color: white;
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	padding:10px ;
+}
+
+.carta{
+	display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem;
+    width: 18rem;
+    height: 8rem;
+    color: black;
+    border-radius: 20px;
+   
+}
+
+ .icono{
+	display: flex;
+	align-items: center;
+}
+a{
+	text-decoration: none;
+	color: white;
+}
+
+.contenedor{
+	width: 100%;
+    height: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: 1rem;
+
+}
+
+.carta:hover{
+	  transform: scale(1.2);
+}
+.apodo{
+	font-size: 1.5rem;
+}
+.visit{
+	color: gray;
+}
+.location{
+	color: red;
+}
